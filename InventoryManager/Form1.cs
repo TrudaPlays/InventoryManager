@@ -19,8 +19,26 @@ namespace InventoryManager
 
         private void InventoryManagerForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'inventoryDatabaseDataSet.Products' table. You can move, or remove it, as needed.
-            this.productsTableAdapter.Fill(this.inventoryDatabaseDataSet.Products);
+            // Skip loading at design time
+            if (this.DesignMode) return;
+
+            try
+            {
+                // Ensure required designer components are available
+                if (productsTableAdapter1 == null || inventoryDatabaseDataSet1 == null)
+                    return;
+
+                // Clear existing rows to ensure a fresh load
+                inventoryDatabaseDataSet1.Products.Clear();
+
+                // Load products into dataset
+                this.productsTableAdapter1.Fill(this.inventoryDatabaseDataSet1.Products);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to load products. Please contact support.", "Load error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Consider logging the exception details to a file or telemetry
+            }
 
         }
     }

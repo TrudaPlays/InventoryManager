@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.txtCategory = new System.Windows.Forms.TextBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
@@ -39,22 +38,10 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.messageBox = new System.Windows.Forms.Label();
-            this.dataGridViewProductsTable = new System.Windows.Forms.DataGridView();
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblQuantity = new System.Windows.Forms.Label();
-            this.inventoryDatabaseDataSet = new InventoryManager.InventoryDatabaseDataSet();
-            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productsTableAdapter = new InventoryManager.InventoryDatabaseDataSetTableAdapters.ProductsTableAdapter();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductsTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryDatabaseDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProductName
@@ -139,24 +126,6 @@
             this.messageBox.TabIndex = 9;
             this.messageBox.Text = "Messages will show here";
             // 
-            // dataGridViewProductsTable
-            // 
-            this.dataGridViewProductsTable.AutoGenerateColumns = false;
-            this.dataGridViewProductsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewProductsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.productNameDataGridViewTextBoxColumn,
-            this.categoryDataGridViewTextBoxColumn,
-            this.priceDataGridViewTextBoxColumn,
-            this.quantityDataGridViewTextBoxColumn});
-            this.dataGridViewProductsTable.DataSource = this.productsBindingSource;
-            this.dataGridViewProductsTable.Location = new System.Drawing.Point(430, 99);
-            this.dataGridViewProductsTable.Name = "dataGridViewProductsTable";
-            this.dataGridViewProductsTable.RowHeadersWidth = 62;
-            this.dataGridViewProductsTable.RowTemplate.Height = 28;
-            this.dataGridViewProductsTable.Size = new System.Drawing.Size(812, 297);
-            this.dataGridViewProductsTable.TabIndex = 10;
-            // 
             // lblProductName
             // 
             this.lblProductName.AutoSize = true;
@@ -193,70 +162,15 @@
             this.lblQuantity.TabIndex = 14;
             this.lblQuantity.Text = "Quantity";
             // 
-            // inventoryDatabaseDataSet
-            // 
-            this.inventoryDatabaseDataSet.DataSetName = "InventoryDatabaseDataSet";
-            this.inventoryDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // productsBindingSource
-            // 
-            this.productsBindingSource.DataMember = "Products";
-            this.productsBindingSource.DataSource = this.inventoryDatabaseDataSet;
-            // 
-            // productsTableAdapter
-            // 
-            this.productsTableAdapter.ClearBeforeFill = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // productNameDataGridViewTextBoxColumn
-            // 
-            this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
-            this.productNameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // categoryDataGridViewTextBoxColumn
-            // 
-            this.categoryDataGridViewTextBoxColumn.DataPropertyName = "Category";
-            this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
-            this.categoryDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
-            this.categoryDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            this.priceDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            this.priceDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            this.quantityDataGridViewTextBoxColumn.Width = 150;
-            // 
             // InventoryManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1254, 593);
+            this.ClientSize = new System.Drawing.Size(1305, 593);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.lblCategory);
             this.Controls.Add(this.lblProductName);
-            this.Controls.Add(this.dataGridViewProductsTable);
             this.Controls.Add(this.messageBox);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnExit);
@@ -270,9 +184,6 @@
             this.Name = "InventoryManagerForm";
             this.Text = "InventoryManager";
             this.Load += new System.EventHandler(this.InventoryManagerForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductsTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryDatabaseDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,19 +201,10 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label messageBox;
-        private System.Windows.Forms.DataGridView dataGridViewProductsTable;
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label lblQuantity;
-        private InventoryDatabaseDataSet inventoryDatabaseDataSet;
-        private System.Windows.Forms.BindingSource productsBindingSource;
-        private InventoryDatabaseDataSetTableAdapters.ProductsTableAdapter productsTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
     }
 }
 
