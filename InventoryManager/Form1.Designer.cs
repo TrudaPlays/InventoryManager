@@ -179,6 +179,7 @@
             // dataGridView1
             // 
             this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
@@ -187,11 +188,12 @@
             this.priceDataGridViewTextBoxColumn,
             this.quantityDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.productsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(411, 105);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridView1.Location = new System.Drawing.Point(496, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(809, 299);
+            this.dataGridView1.Size = new System.Drawing.Size(809, 593);
             this.dataGridView1.TabIndex = 15;
             // 
             // inventoryDataSet
@@ -220,7 +222,6 @@
             this.idDataGridViewTextBoxColumn.HeaderText = "Id";
             this.idDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Width = 150;
             // 
             // productNameDataGridViewTextBoxColumn
             // 
@@ -228,7 +229,6 @@
             this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
             this.productNameDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
-            this.productNameDataGridViewTextBoxColumn.Width = 150;
             // 
             // categoryDataGridViewTextBoxColumn
             // 
@@ -236,7 +236,6 @@
             this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
             this.categoryDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
-            this.categoryDataGridViewTextBoxColumn.Width = 150;
             // 
             // priceDataGridViewTextBoxColumn
             // 
@@ -244,7 +243,6 @@
             this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
             this.priceDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            this.priceDataGridViewTextBoxColumn.Width = 150;
             // 
             // quantityDataGridViewTextBoxColumn
             // 
@@ -252,7 +250,6 @@
             this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
             this.quantityDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            this.quantityDataGridViewTextBoxColumn.Width = 150;
             // 
             // InventoryManagerForm
             // 
