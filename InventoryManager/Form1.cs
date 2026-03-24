@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace InventoryManager
 {
-    public partial class Form1 : Form
+    public partial class InventoryManagerForm : Form
     {
-        public Form1()
+        public InventoryManagerForm()
         {
             InitializeComponent();
+        }
+
+        private void InventoryManagerForm_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'inventoryDatabaseDataSet.Products' table. You can move, or remove it, as needed.
+            this.productsTableAdapter.Fill(this.inventoryDatabaseDataSet.Products);
+
         }
     }
 }
