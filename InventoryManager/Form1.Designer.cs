@@ -44,17 +44,20 @@
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.InventoryDataGridView = new System.Windows.Forms.DataGridView();
-            this.inventoryDataSet = new InventoryManager.InventoryDataSet();
-            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productsTableAdapter = new InventoryManager.InventoryDataSetTableAdapters.ProductsTableAdapter();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.inventoryDataSet = new InventoryManager.InventoryDataSet();
+            this.productsTableAdapter = new InventoryManager.InventoryDataSetTableAdapters.ProductsTableAdapter();
+            this.lblId = new System.Windows.Forms.Label();
+            this.txtProductId = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProductName
@@ -103,6 +106,7 @@
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -112,6 +116,7 @@
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnExit
             // 
@@ -182,6 +187,7 @@
             // 
             this.InventoryDataGridView.AutoGenerateColumns = false;
             this.InventoryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.InventoryDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.InventoryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.InventoryDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -196,20 +202,6 @@
             this.InventoryDataGridView.RowTemplate.Height = 28;
             this.InventoryDataGridView.Size = new System.Drawing.Size(809, 299);
             this.InventoryDataGridView.TabIndex = 15;
-            // 
-            // inventoryDataSet
-            // 
-            this.inventoryDataSet.DataSetName = "InventoryDataSet";
-            this.inventoryDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // productsBindingSource
-            // 
-            this.productsBindingSource.DataMember = "Products";
-            this.productsBindingSource.DataSource = this.inventoryDataSet;
-            // 
-            // productsTableAdapter
-            // 
-            this.productsTableAdapter.ClearBeforeFill = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -246,11 +238,55 @@
             this.dataGridViewTextBoxColumn5.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
+            // productsBindingSource
+            // 
+            this.productsBindingSource.DataMember = "Products";
+            this.productsBindingSource.DataSource = this.inventoryDataSet;
+            // 
+            // inventoryDataSet
+            // 
+            this.inventoryDataSet.DataSetName = "InventoryDataSet";
+            this.inventoryDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // productsTableAdapter
+            // 
+            this.productsTableAdapter.ClearBeforeFill = true;
+            // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Location = new System.Drawing.Point(39, 35);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(85, 20);
+            this.lblId.TabIndex = 17;
+            this.lblId.Text = "Product ID";
+            // 
+            // txtProductId
+            // 
+            this.txtProductId.Location = new System.Drawing.Point(187, 32);
+            this.txtProductId.Name = "txtProductId";
+            this.txtProductId.Size = new System.Drawing.Size(209, 26);
+            this.txtProductId.TabIndex = 16;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(614, 410);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(110, 60);
+            this.btnSave.TabIndex = 18;
+            this.btnSave.Text = "Save Changes";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // InventoryManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1431, 593);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.lblId);
+            this.Controls.Add(this.txtProductId);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.lblCategory);
@@ -266,12 +302,14 @@
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.InventoryDataGridView);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "InventoryManagerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InventoryManager";
             this.Load += new System.EventHandler(this.InventoryManagerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,6 +345,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.Label lblId;
+        private System.Windows.Forms.TextBox txtProductId;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
