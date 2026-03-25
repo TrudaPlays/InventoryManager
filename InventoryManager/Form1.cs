@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 // using System.Data.Sql; // not used
 
 namespace InventoryManager
@@ -19,6 +20,8 @@ namespace InventoryManager
         public InventoryManagerForm()
         {
             InitializeComponent();
+            // Ensure row click populates the edit fields
+            this.InventoryDataGridView.CellClick += this.InventoryDataGridView_CellClick;
         }
 
         private void InventoryManagerForm_Load(object sender, EventArgs e)
@@ -113,7 +116,26 @@ namespace InventoryManager
                     return;
                 }
 
-                // If a row is selected, delete by selection. Otherwise, use txtProductId.
+                // If the user entered an Id in the Id textbox, prefer that for deletion
+                var idText = txtProductId.Text?.Trim();
+                if (!string.IsNullOrWhiteSpace(idText) && int.TryParse(idText, out var typedId))
+                {
+                    var drTyped = MessageBox.Show($"Delete product with Id {typedId}?", "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (drTyped == DialogResult.Yes)
+                    {
+                        _controller.DeleteById(typedId);
+                        messageBox.BackColor = Color.LightGreen;
+                        messageBox.Text = "Product deleted.";
+                    }
+                    else
+                    {
+                        messageBox.BackColor = Color.LightPink;
+                        messageBox.Text = "Delete cancelled.";
+                    }
+                    return;
+                }
+
+                // Otherwise, if a row is selected, delete by selection.
                 if (InventoryDataGridView.CurrentRow != null)
                 {
                     var idCell = InventoryDataGridView.CurrentRow.Cells[0];
@@ -134,21 +156,10 @@ namespace InventoryManager
                         return;
                     }
                 }
-                // Confirm deletion when using the Id textbox fallback
-                var idText = txtProductId.Text?.Trim();
-                var confirmMsg = string.IsNullOrWhiteSpace(idText) ? "Delete product?" : $"Delete product with Id {idText}?";
-                var dr2 = MessageBox.Show(confirmMsg, "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr2 == DialogResult.Yes)
-                {
-                    _controller.Delete();
-                    messageBox.BackColor = Color.LightGreen;
-                    messageBox.Text = "Product deleted.";
-                }
-                else
-                {
-                    messageBox.BackColor = Color.LightPink;
-                    messageBox.Text = "Delete cancelled.";
-                }
+
+                // Nothing to delete
+                messageBox.BackColor = Color.LightPink;
+                messageBox.Text = "No Id provided and no row selected to delete.";
             }
             catch (InvalidOperationException ex)
             {
@@ -305,6 +316,117 @@ namespace InventoryManager
                 messageBox.BackColor = Color.LightPink;
                 messageBox.Text = $"Save failed: {ex.Message}";
             }
+        }
+
+        private void InventoryDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the click was on a valid row (not a header)
+            if (e.RowIndex >= 0)
+            {
+                // Access the clicked row
+                try
+                {
+                    DataGridViewRow row = InventoryDataGridView.Rows[e.RowIndex];
+
+                    // Populate textboxes from the clicked row (guarding for missing columns)
+                    if (row.Cells.Count > 0 && row.Cells[0].Value != null)
+                        txtProductId.Text = row.Cells[0].Value.ToString();
+                    else
+                        txtProductId.Text = string.Empty;
+
+                    txtProductName.Text = row.Cells.Count > 1 && row.Cells[1].Value != null ? row.Cells[1].Value.ToString() : string.Empty;
+                    txtCategory.Text = row.Cells.Count > 2 && row.Cells[2].Value != null ? row.Cells[2].Value.ToString() : string.Empty;
+                    txtPrice.Text = row.Cells.Count > 3 && row.Cells[3].Value != null ? row.Cells[3].Value.ToString() : string.Empty;
+                    txtQuantity.Text = row.Cells.Count > 4 && row.Cells[4].Value != null ? row.Cells[4].Value.ToString() : string.Empty;
+
+                    messageBox.BackColor = Color.LightGreen;
+                    messageBox.Text = "Row loaded. Modify fields and click Save to apply changes.";
+                }
+                catch (Exception ex)
+                {
+                    messageBox.BackColor = Color.LightPink;
+                    messageBox.Text = $"Failed to load row: {ex.Message}";
+                }
+            }
+        }
+
+        private void btnSaveToFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_controller == null)
+                {
+                    messageBox.BackColor = Color.LightPink;
+                    messageBox.Text = "Controller not initialized.";
+                    return;
+                }
+
+                var confirm = MessageBox.Show("Save current database contents to Desktop\\DatabaseExport.csv  ?", "Confirm export", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm != DialogResult.Yes)
+                {
+                    messageBox.BackColor = Color.LightPink;
+                    messageBox.Text = "Export cancelled.";
+                    return;
+                }
+
+                // Try to get a DataTable from the grid's DataSource
+                DataTable dt = null;
+                var ds = InventoryDataGridView.DataSource;
+                if (ds is DataTable t)
+                    dt = t;
+                else if (ds is DataView dv)
+                    dt = dv.Table;
+                else if (ds is BindingSource bs)
+                {
+                    if (bs.DataSource is DataTable t2) dt = t2;
+                    else if (bs.DataSource is DataView dv2) dt = dv2.Table;
+                }
+
+                // If no table available, try refreshing the controller and re-check
+                if (dt == null)
+                {
+                    _controller.Refresh();
+                    ds = InventoryDataGridView.DataSource;
+                    if (ds is DataTable t3)
+                        dt = t3;
+                    else if (ds is DataView dv3)
+                        dt = dv3.Table;
+                    else if (ds is BindingSource bs3)
+                    {
+                        if (bs3.DataSource is DataTable t4) dt = t4;
+                        else if (bs3.DataSource is DataView dv4) dt = dv4.Table;
+                    }
+                }
+
+                if (dt == null)
+                {
+                    messageBox.BackColor = Color.LightPink;
+                    messageBox.Text = "No tabular data available to export.";
+                    return;
+                }
+
+                var desktopPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DatabaseExport.csv");
+                using (var sw = new System.IO.StreamWriter(desktopPath, false, Encoding.UTF8))
+                {
+                    // header
+                    sw.WriteLine(string.Join("\t", dt.Columns.Cast<DataColumn>().Select(c => c.ColumnName)));
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var values = dt.Columns.Cast<DataColumn>().Select(c => row[c] == DBNull.Value ? string.Empty : row[c].ToString());
+                        sw.WriteLine(string.Join("\t", values));
+                    }
+                }
+
+                messageBox.BackColor = Color.LightGreen;
+                messageBox.Text = $"Exported {dt.Rows.Count} rows to: {desktopPath}";
+            }
+            catch (Exception ex)
+            {
+                messageBox.BackColor = Color.LightPink;
+                messageBox.Text = $"Export failed: {ex.Message}";
+            }
+
         }
     }
     }

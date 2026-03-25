@@ -55,6 +55,7 @@
             this.lblId = new System.Windows.Forms.Label();
             this.txtProductId = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnSaveToFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryDataSet)).BeginInit();
@@ -141,7 +142,7 @@
             // messageBox
             // 
             this.messageBox.AutoSize = true;
-            this.messageBox.Location = new System.Drawing.Point(43, 533);
+            this.messageBox.Location = new System.Drawing.Point(428, 38);
             this.messageBox.Name = "messageBox";
             this.messageBox.Size = new System.Drawing.Size(183, 20);
             this.messageBox.TabIndex = 9;
@@ -202,6 +203,7 @@
             this.InventoryDataGridView.RowTemplate.Height = 28;
             this.InventoryDataGridView.Size = new System.Drawing.Size(809, 299);
             this.InventoryDataGridView.TabIndex = 15;
+            this.InventoryDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InventoryDataGridView_CellClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -278,12 +280,23 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnSaveToFile
+            // 
+            this.btnSaveToFile.Location = new System.Drawing.Point(987, 493);
+            this.btnSaveToFile.Name = "btnSaveToFile";
+            this.btnSaveToFile.Size = new System.Drawing.Size(110, 60);
+            this.btnSaveToFile.TabIndex = 19;
+            this.btnSaveToFile.Text = "Save to txt File";
+            this.btnSaveToFile.UseVisualStyleBackColor = true;
+            this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
+            // 
             // InventoryManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1431, 593);
+            this.Controls.Add(this.btnSaveToFile);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.txtProductId);
@@ -348,6 +361,7 @@
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.TextBox txtProductId;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnSaveToFile;
     }
 }
 
