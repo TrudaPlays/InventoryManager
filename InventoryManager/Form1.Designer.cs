@@ -93,6 +93,7 @@
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -114,7 +115,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(473, 513);
+            this.btnExit.Location = new System.Drawing.Point(1247, 493);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(110, 60);
             this.btnExit.TabIndex = 7;
