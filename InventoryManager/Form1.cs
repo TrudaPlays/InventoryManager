@@ -19,9 +19,14 @@ namespace InventoryManager
 
         private void InventoryManagerForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'inventoryDataSet.Products' table. You can move, or remove it, as needed.
-            this.productsTableAdapter.Fill(this.inventoryDataSet.Products);
+            
 
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();    
+        }
+        
     }
 }
