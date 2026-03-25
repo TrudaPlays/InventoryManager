@@ -72,6 +72,12 @@ namespace InventoryManager
             if (!TryParseQuantity(out var quantity))
                 throw new ArgumentException("Quantity is invalid.", nameof(_txtQuantity));
 
+            if (price <= 0)
+                throw new ArgumentException("Price must be greater than 0.", nameof(_txtPrice));
+
+            if (quantity <= 0)
+                throw new ArgumentException("Quantity must be greater than 0.", nameof(_txtQuantity));
+
             // Check for existing product with same name (case-insensitive)
             using (var conn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand("SELECT COUNT(1) FROM Products WHERE LOWER(ProductName) = LOWER(@name)", conn))

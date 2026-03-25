@@ -115,7 +115,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(1247, 493);
+            this.btnExit.Location = new System.Drawing.Point(1131, 493);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(110, 60);
             this.btnExit.TabIndex = 7;
@@ -131,6 +131,7 @@
             this.btnRefresh.TabIndex = 8;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // messageBox
             // 

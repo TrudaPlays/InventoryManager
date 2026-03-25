@@ -53,11 +53,13 @@ namespace InventoryManager
             {
                 if (_controller == null)
                 {
+                    messageBox.BackColor = Color.LightPink;
                     messageBox.Text = "Controller not initialized.";
                     return;
                 }
 
                 _controller.Add();
+                messageBox.BackColor = Color.LightGreen;
                 messageBox.Text = "Product added successfully.";
             }
             catch (InvalidOperationException ex)
@@ -71,6 +73,28 @@ namespace InventoryManager
             catch (Exception ex)
             {
                 messageBox.Text = $"Add failed: {ex.Message}";
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_controller == null)
+                {
+                    messageBox.BackColor = Color.LightPink;
+                    messageBox.Text = "Controller not initialized.";
+                    return;
+                }
+
+                _controller.Refresh();
+                messageBox.BackColor = Color.LightGreen;
+                messageBox.Text = "Refreshed.";
+            }
+            catch (Exception ex)
+            {
+                messageBox.BackColor = Color.LightPink;
+                messageBox.Text = $"Refresh failed: {ex.Message}";
             }
         }
     }
