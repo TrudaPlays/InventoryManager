@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryManagerForm));
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.txtCategory = new System.Windows.Forms.TextBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
@@ -56,6 +57,7 @@
             this.txtProductId = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveToFile = new System.Windows.Forms.Button();
+            this.HowToInstructions = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryDataSet)).BeginInit();
@@ -286,16 +288,26 @@
             this.btnSaveToFile.Name = "btnSaveToFile";
             this.btnSaveToFile.Size = new System.Drawing.Size(110, 60);
             this.btnSaveToFile.TabIndex = 19;
-            this.btnSaveToFile.Text = "Save to txt File";
+            this.btnSaveToFile.Text = "Save to csv File";
             this.btnSaveToFile.UseVisualStyleBackColor = true;
             this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
+            // 
+            // HowToInstructions
+            // 
+            this.HowToInstructions.AutoSize = true;
+            this.HowToInstructions.Location = new System.Drawing.Point(39, 513);
+            this.HowToInstructions.Name = "HowToInstructions";
+            this.HowToInstructions.Size = new System.Drawing.Size(454, 140);
+            this.HowToInstructions.TabIndex = 20;
+            this.HowToInstructions.Text = resources.GetString("HowToInstructions.Text");
             // 
             // InventoryManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1431, 593);
+            this.ClientSize = new System.Drawing.Size(1431, 693);
+            this.Controls.Add(this.HowToInstructions);
             this.Controls.Add(this.btnSaveToFile);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblId);
@@ -362,6 +374,7 @@
         private System.Windows.Forms.TextBox txtProductId;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveToFile;
+        private System.Windows.Forms.Label HowToInstructions;
     }
 }
 
